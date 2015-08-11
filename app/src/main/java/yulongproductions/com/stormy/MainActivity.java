@@ -2,13 +2,20 @@ package yulongproductions.com.stormy;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +29,15 @@ public class MainActivity extends ActionBarActivity {
                 "/" + latitude + "," + longitude;
 
         OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(forecastUrl).build();
+        Call call = client.newCall(request);
+        try {
+            Response response = call.execute();
+            if (response.isSuccessful()) {
+                Log.v(TAG, response.body().string());
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Exception caught: ", e);
+        }
     }
 }
