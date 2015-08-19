@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.okhttp.Call;
@@ -31,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private CurrentWeather mCurrentWeather;
+    private ColorWheel mColorWheel;
 
     @Bind(R.id.timeLabel) TextView mTimeLabel;
     @Bind(R.id.temperatureLabel) TextView mTemperatureLabel;
@@ -40,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
     @Bind(R.id.iconImageView) ImageView mIconImageView;
     @Bind(R.id.refreshImageView) ImageView mRefreshImageView;
     @Bind(R.id.progressBar) ProgressBar mProgressBar;
+    @Bind(R.id.relativeLayout) RelativeLayout mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,10 @@ public class MainActivity extends ActionBarActivity {
         final double latitude = 37.8267;
         final double longitude = -122.423;
 
-        mIconImageView.setOnClickListener(new View.OnClickListener() {
+        mRefreshImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLayout.setBackgroundColor(mColorWheel.getColor());
                 getForecast(latitude, longitude);
             }
         });
@@ -106,6 +110,8 @@ public class MainActivity extends ActionBarActivity {
                         } else {
                             alertUserAboutError();
                         }
+                    } catch (IOException e) {
+                        Log.e(TAG, "Exception caught: ", e);
                     } catch (JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
