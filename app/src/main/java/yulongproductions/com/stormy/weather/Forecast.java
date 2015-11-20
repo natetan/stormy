@@ -4,16 +4,16 @@ package yulongproductions.com.stormy.weather;
  * Created by Yulong on 11/19/2015.
  */
 public class Forecast {
-    private Current mCurrent;
+    private Current mCurrentWeather;
     private Hour[] mHourlyForecast;
     private Day[] mDailyForecast;
 
-    public Current getCurrent() {
-        return mCurrent;
+    public Current getCurrentWeather() {
+        return mCurrentWeather;
     }
 
-    public void setCurrent(Current current) {
-        mCurrent = current;
+    public void setCurrentWeather(Current currentWeather) {
+        mCurrentWeather = currentWeather;
     }
 
     public Hour[] getHourlyForecast() {

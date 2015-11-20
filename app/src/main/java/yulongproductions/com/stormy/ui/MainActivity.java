@@ -135,7 +135,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void updateDisplay() {
-        Current current = mForecast.getCurrent();
+        Current current = mForecast.getCurrentWeather();
         mTemperatureLabel.setText(current.getTemperature() + "");
         mTimeLabel.setText("At " + current.getFormattedTime() + " it will be");
         mHumidityValue.setText(current.getHumidity() + "");
@@ -148,7 +148,7 @@ public class MainActivity extends ActionBarActivity {
 
     private Forecast parseForecastDetails(String jsonData) throws JSONException {
         Forecast forecast = new Forecast();
-        forecast.setCurrent(this.getCurrentDetails(jsonData));
+        forecast.setCurrentWeather(this.getCurrentDetails(jsonData));
         return forecast;
     }
 
